@@ -22,7 +22,16 @@ if ($server == "GET"){
         echo "Error: data not added";
     }
 }else if($server=="DELETE"){
-    echo "Delete data";
+    $myEntireBody = file_get_contents('php://input'); 
+    $myBody = json_decode($myEntireBody);
+    $id = $myBody->id;
+    $sql = "DELETE FROM users WHERE id = $id";
+    if (mysqli_query($conn, $sql)){
+        echo "User deleted successfully";
+    }else{
+        echo "Error: data not deleted";
+    }
+   
 }else if($server=="PUT"){
     echo "Update data";
 }else{
