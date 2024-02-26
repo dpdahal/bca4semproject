@@ -2,6 +2,7 @@
 require_once "connection.php";
 
 $server =$_SERVER['REQUEST_METHOD'];
+
 function getUser(){
     $sql = "SELECT * FROM users";
     $result = mysqli_query($GLOBALS['conn'], $sql);
@@ -20,6 +21,12 @@ if ($server == "GET"){
     }else{
         echo "Error: data not added";
     }
+}else if($server=="DELETE"){
+    echo "Delete data";
+}else if($server=="PUT"){
+    echo "Update data";
+}else{
+    echo "Invalid request";
 }
 
 
