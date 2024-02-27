@@ -33,7 +33,18 @@ if ($server == "GET"){
     }
    
 }else if($server=="PUT"){
-    echo "Update data";
+    $myEntireBody = file_get_contents('php://input');
+    $myBody = json_decode($myEntireBody);
+    $id = $myBody->id;
+    $name = $myBody->name;
+    $address = $myBody->address;
+    $sql="UPDATE users SET name='$name', address='$address' WHERE id=$id";
+    if (mysqli_query($conn, $sql)){
+        echo "User updated successfully";
+    }else{
+        echo "Error: data not updated";
+    }
+
 }else{
     echo "Invalid request";
 }
